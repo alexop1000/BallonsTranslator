@@ -8,7 +8,7 @@ import time
 
 from tqdm import tqdm
 from qtpy.QtWidgets import QAction, QFileDialog, QMenu, QHBoxLayout, QVBoxLayout, QApplication, QStackedWidget, QSplitter, QListWidget, QShortcut, QListWidgetItem, QMessageBox, QTextEdit, QPlainTextEdit
-from qtpy.QtCore import Qt, QPoint, QSize, QEvent, Signal
+from qtpy.QtCore import Qt, QPoint, QSize, QEvent, Signal, QTranslator, QLocale, QFileSystemWatcher
 from qtpy.QtGui import QContextMenuEvent, QTextCursor, QGuiApplication, QIcon, QCloseEvent, QKeySequence, QKeyEvent, QPainter, QClipboard
 
 from utils.logger import logger as LOGGER
@@ -82,6 +82,11 @@ class MainWindow(mainwindow_cls):
         self.app = app
         self.backup_blkstyles = []
         self._run_imgtrans_wo_textstyle_update = False
+
+        # Setup stylesheet watcher
+        self.stylesheet_watcher = QFileSystemWatcher(self)
+        self.stylesheet_watcher.addPath(str(shared.STYLESHEET_PATH))
+        self.stylesheet_watcher.fileChanged.connect(self.on_stylesheet_changed)
 
         self.setupThread()
         self.setupUi()
@@ -1447,9 +1452,10 @@ class MainWindow(mainwindow_cls):
         setattr(pcfg, cfg_name, show)
 
     def on_hide_view_widget(self, cfg_name: str):
-        d = shared.config_name_to_view_widget[cfg_name]
-        widget: ViewWidget = d['widget']
-        widget.setVisible(False)
-        action: QAction = d['action']
-        action.setChecked(False)
         setattr(pcfg, cfg_name, False)
+
+    def on_stylesheet_changed(self, path):
+        # Re-add the file to watch (some systems may remove the watch after the file is modified)
+        self.stylesheet_watcher.addPath(path)
+        # Reload and apply the stylesheet
+        self.resetStyleSheet()

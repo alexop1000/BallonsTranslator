@@ -15,7 +15,7 @@
     </message>
     <message>
         <location filename="../ui/mainwindowbars.py" line="550"/>
-        <source>translate page</source>
+        <source>Translate page</source>
         <translation>Перевести страницу</translation>
     </message>
     <message>

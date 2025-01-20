@@ -2,7 +2,7 @@ import copy
 import sys
 from typing import List
 
-from qtpy.QtWidgets import QLineEdit, QSizePolicy, QHBoxLayout, QVBoxLayout, QFrame, QFontComboBox, QApplication, QPushButton, QLabel, QGroupBox, QCheckBox, QSlider
+from qtpy.QtWidgets import QLineEdit, QSizePolicy, QHBoxLayout, QVBoxLayout, QFrame, QFontComboBox, QApplication, QPushButton, QLabel, QGroupBox, QCheckBox, QSlider, QGridLayout
 from qtpy.QtCore import Signal, Qt
 from qtpy.QtGui import QFocusEvent, QMouseEvent, QTextCursor, QKeyEvent
 
@@ -411,12 +411,20 @@ class FontFormatPanel(Widget):
         )
         self.textadvancedfmt_panel.param_changed.connect(self.on_param_changed)
 
+        # Effects grid
+        self.effects_grid = QGridLayout()
+        self.effects_grid.setSpacing(shared.WIDGET_SPACING_CLOSE)
+        self.effects_grid.setContentsMargins(0, 0, 0, 0)
+        self.effects_grid.setAlignment(Qt.AlignmentFlag.AlignTop)
+
         self.shadowBtn = ClickableLabel(self.tr("Shadow"), self)
         self.shadowBtn.clicked.connect(self.on_shadow_btn_clicked)
-        self.textadvancedfmt_panel.vlayout.addWidget(self.shadowBtn)
+        self.effects_grid.addWidget(self.shadowBtn, 0, 0)
         self.gradientBtn = ClickableLabel(self.tr("Gradient"), self)
         self.gradientBtn.clicked.connect(self.on_gradient_btn_clicked)
-        self.textadvancedfmt_panel.vlayout.addWidget(self.gradientBtn)
+        self.effects_grid.addWidget(self.gradientBtn, 0, 1)
+        
+        self.textadvancedfmt_panel.vlayout.addLayout(self.effects_grid)
         
         self.foldTextBtn = CheckableLabel(self.tr("Unfold"), self.tr("Fold"), False)
         self.sourceBtn = TextCheckerLabel(self.tr("Source"))
@@ -467,7 +475,7 @@ class FontFormatPanel(Widget):
         hl4.setStretch(1, 1)
         hl4.setStretch(2, 1)
         hl4.setContentsMargins(0, 12, 0, 0)
-        hl4.setSpacing(0)
+        hl4.setSpacing(4)
 
         self.vlayout.addLayout(vl0)
         self.vlayout.addLayout(hl1)

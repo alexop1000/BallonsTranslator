@@ -1,11 +1,19 @@
 QWidget {
-    /* border-style: none; */
     color: @qwidgetForegroundColor;
     background-color: @qwidgetBackgroundColor;
+    border-radius: 4px;
 }
 
 SeparatorWidget {
     border-color: @borderColor;
+    border-radius: 0px;
+}
+
+QWidget#BottomBar > StatusButton{
+    font-size: 12px;
+    margin-top: 3px;
+    padding-right: 5px;
+    text-transform: capitalize;
 }
 
 Widget {
@@ -14,7 +22,7 @@ Widget {
 
 
 ConfigTextLabel {
-    background-color : @emptyContentBackgroundColor;
+    background-color : transparent;
 }
 
 CustomGV {
@@ -32,16 +40,17 @@ ConfigTable {
 }
 
 ConfigBlock {
-    background-color: @emptyContentBackgroundColor
+    background-color: @emptyContentBackgroundColor;
+    border-radius: 4px;
 }
 
 ConfigSubBlock {
-    background-color: @emptyContentBackgroundColor
+    border-radius: 4px;
 }
 
 SearchResultTree {
     border-style: none;
-    background-color: @widgetBackgroundColor;
+    background-color: transparent;
 }
 
 QSplitter:handle {
@@ -50,10 +59,6 @@ QSplitter:handle {
 
 QSplitter::handle:pressed {
     background: rgb(30, 147, 229)
-}
-
-ConfigSubBlock::hover {
-    background-color: rgba(30, 147, 229, 20%);
 }
 
 SourceTextEdit {
@@ -75,6 +80,7 @@ QComboBox {
     padding-left: 8px;
     border: 1px solid @borderColor;
     background-color: @transtexteditBackgroundColor;
+    border-radius: 4px;
 }
 
 QLineEdit {
@@ -114,6 +120,7 @@ QFontComboBox#FontFamilyBox {
     padding-right: 14px;
     padding-left: 6px;
     border-color: @borderColor;
+    border-radius: 4px;
 }
 
 QFontComboBox#FontFamilyBox::hover {
@@ -127,6 +134,7 @@ SizeComboBox {
     min-width: 54px;
     max-width: 54px;
     border-color: @borderColor;
+    border-radius: 4px;
 }
 
 SizeComboBox::hover {
@@ -167,7 +175,9 @@ ColorPickerLabel {
     min-width: 25px;
     max-width: 25px;
     border: 2px solid @borderColor;
+    border-radius: 5px;
 }
+
 
 ColorPickerLabel::hover {
     border: 2px solid rgb(30, 147, 229);
@@ -509,7 +519,6 @@ OpenBtn {
     border-style: none;
     image: url(icons/openbtn.svg);
     background-color: @widgetBackgroundColor;
-
 }
 
 OpenBtn::hover {
@@ -726,12 +735,22 @@ QLabel#angleLabel {
     color: rgba(255, 255, 255, 150);
 }
 
+ClickableLabel {
+    border-radius: 4px;
+    padding-left: 4px;
+}
 .ClickableLabel::hover {
     background-color: rgba(30, 147, 229, 20%);
 }
 
 .ExpandLabel::hover {
     background-color: rgba(30, 147, 229, 20%);
+}
+
+QVBoxLayout {
+    background-color: rgba(30, 147, 229, 20%);
+    border-radius: 4px;
+    padding: 4px;
 }
 
 DrawToolCheckBox::indicator {

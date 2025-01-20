@@ -562,11 +562,12 @@ class BottomBar(Widget):
         super().__init__(mainwindow, *args, **kwargs)
         self.setFixedHeight(BOTTOMBAR_HEIGHT)
         self.setMouseTracking(True)
+        self.setObjectName('BottomBar')
         self.mainwindow = mainwindow
 
         self.translatorStatusbtn = TranslatorStatusButton()
         self.translatorStatusbtn.setHidden(True)
-        self.transTranspageBtn = RunStopTextBtn(self.tr('translate page'),
+        self.transTranspageBtn = RunStopTextBtn(self.tr('Translate page'),
                                                 self.tr('stop'),
                                                 self.tr('translate current page'),
                                                 self.tr('stop translation'))
@@ -604,7 +605,7 @@ class BottomBar(Widget):
         self.hlayout.addWidget(self.paintChecker)
         self.hlayout.addWidget(self.texteditChecker)
         self.hlayout.addWidget(self.textblockChecker)
-        self.hlayout.setContentsMargins(60, 0, 10, WINDOW_BORDER_WIDTH)
+        self.hlayout.setContentsMargins(60, 0, 10, 0)
 
 
     def onPaintCheckerPressed(self):

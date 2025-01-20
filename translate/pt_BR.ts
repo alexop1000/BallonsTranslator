@@ -5,7 +5,7 @@
     <name>BottomBar</name>
     <message>
       <location filename="..\ui\mainwindowbars.py" line="563"/>
-      <source>translate page</source>
+      <source>Translate page</source>
       <translation>Traduzir página</translation>
     </message>
     <message>
